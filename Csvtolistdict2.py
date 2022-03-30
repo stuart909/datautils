@@ -5,8 +5,9 @@
 import csv
 
 data = []
+path = "/path_here/file"
 
-with open('/home/stuart/Documents/peeps.csv', newline='') as csvfile:
+with open(path, newline='') as csvfile:
     d = csv.reader(csvfile, delimiter=',')
     for n,row in enumerate(d):
         if n == 0:
