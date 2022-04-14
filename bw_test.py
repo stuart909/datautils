@@ -147,6 +147,6 @@ class DataConnector:
         return [i() for i in self.data]
 
 if __name__ == "__main__":
-    conn = DataConnector('bw_events.json')
+    conn = DataConnector('bw_test.json')
     data = conn.data
     
