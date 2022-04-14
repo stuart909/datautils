@@ -1,0 +1,10 @@
+{"user_id": "1001", "name": "bob", "event": {"type": "customer"}}
+{"user_id": "1001", "order_id": "1001", "event": {"type": "order"}}
+{"user_id": "1001", "name": "alice", "event": {"type": "customer"}}
+{"user_id": "1001", "order_id": "1002", "event": {"type": "order"}}
+{"user_id": "1002", "name": "tom", "event": {"type": "customer"}}
+{"user_id": "1002", "order_id": "1003", "event": {"type": "order"}}
+{"user_id": "1003", "name": "bill", "event": {"type": "customer"}}
+{"user_id": "1003", "order_id": "1004", "event": {"type": "order"}}
+{"user_id": "1001", "name": "terry", "event": {"type": "customer"}}
+{"user_id": "1001", "order_id": "1005", "event": {"type": "order"}}
