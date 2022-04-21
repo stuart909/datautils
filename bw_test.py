@@ -17,8 +17,6 @@ class Customer:
     def __call__(self):
         return {"user_id": self.ID, "name": self.name, "event": {"type": "customer"}}
 
-    
-
 
 class Order:
     def __init__(self,ID,order_ID,index):
@@ -37,6 +35,7 @@ class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
+        self.prev = None
 
     def __name__(self):
         return f'Node Class | node - {self.data} | child - {self.next}'
@@ -64,6 +63,7 @@ class Node:
 class LinkedList:
     def __init__(self, nodes=None):
         self.head = None
+        self.parent = None
         if nodes is not None:
             node = Node(data=nodes.pop(0))
             self.head = node
@@ -100,6 +100,19 @@ class LinkedList:
             node = node.next
         return str(nodes)
 
+    def __next__(self):
+        node = self.head
+        if node.next is not None:
+            node.next.prev = self.head
+            self.head = node.next
+            return node
+        else:
+            while node.prev is not None:
+                node = node.prev
+            self.head = node
+            return 'end'
+        
+
     def __iter__(self):
         node = self.head
         while node is not None:
@@ -120,6 +133,7 @@ class LinkedList:
         else:
             return [i for i in self() if i[key] == val]
 
+
 class DataConnector:
     def __init__(self,path):
         self.path = path
@@ -133,7 +147,6 @@ class DataConnector:
             if msg['event']['type'] == 'customer':
                 customer = Customer(msg['user_id'],msg['name'],i)
                 if customer() in self.data.get_customers():
-                    print('active')
                     [j.set_index(i) for j in self.data if customer() == j()]
                 else:
                     self.data.append(customer)
