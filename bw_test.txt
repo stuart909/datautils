@@ -1,0 +1,31 @@
+BW_Test.py document
+
+BW_Test was a homework for a job I decided not to take because the functional library that was supposed to be used in the test was poorly documented and difficult to use.  So this program was written as practice and education for others that want to use linked lists.
+
+The challenge was: use bw_test.json, written as is, to simulate a data I/O stream.  The values coming in the stream are JSON payloads containing customer and order events.  Typically, a customer event predicates an order, however, this may not always be the case.  Regardless, an order requires a valid user ID already in the dataset, else it gets dropped.  So we are to load the data into a program, then handle each event and join two dictionaries.  It's really really easy to add two dicts.  {**dict1,**dict2}  There was a specific format to append the order into a customer json.  Basically, a customer key is tacked on to the customer dict containing a list of dictionary orders.
+
+So I didn't see a challenge in the homework itself, rather, the challenge was learning the API and handling this problem.  Instead, I over engineered another solution.  Using a linked list to create customer and order classes that get organized into a tree structure in nodes.  We can traverese the tree and do cool search features and easily join the orders to the customers.  So that's what I did.  I also added a few search features to the linked list.
+
+Base feature request:
+- Load Json like a stream
+- join order dict into proper customer dict
+- print the dicts
+
+^too easy
+
+
+Over engineered features:
+- Load JSON like a stream
+- put unique customers in a search tree using a linked list
+- stuff the orders into the correct customers based on the last unique user ID and name.  We actually identify the unique user in the tree and when it came in last
+- the data is already joined in the classes, the linked list repr and call methods are all written to complete the assignment by default
+- linked list has iter and next
+- linked list has a search method
+- linked list has an append method to add to the "list"
+- linked list has getitem
+- linked list has some convenience methods
+- node class stores traversal order
+- node class has some convenience methods to allow for assigning specific data values in the customer
+- node class joins the customer and order records with the pull method.  This will be invoked by the linked list when we call as function
+- data connector class opens the file and processes json dumps line by line
+- data connector also has logic that organizes the data into the search tree
