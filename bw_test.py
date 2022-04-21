@@ -1,10 +1,3 @@
-'''
-Written by Stuart Anderson
-Copyright 2022
-linked list test program that merges two json payloads into one data structure according to customer spec
-currently untested with large dataset
-'''
-
 import json
 
 
@@ -19,10 +12,9 @@ class Customer:
         return f'Customer Class | ID:{self.ID} | Name:{self.name}'
 
     def __call__(self):
-        if self.order == []:
-            return {"user_id": self.ID, "name": self.name, "event": {"type": "customer"}}
-        else:
-            return {"user_id": self.ID, "name": self.name, "event": {"type": "customer"}, "order":self.order}
+        return {"user_id": self.ID, "name": self.name, "event": {"type": "customer"}}
+
+    
 
 
 class Order:
@@ -35,7 +27,7 @@ class Order:
         return f'Order Class | ID:{self.ID} | order ID:{self.order_ID}'
 
     def __call__(self):
-        return {"user_id": self.ID, "order_id": self.order_ID, "event": {"type": "order"}}
+        return {"order_id": self.order_ID, "event": {"type": "order"}}
 
 
 class Node:
@@ -44,14 +36,27 @@ class Node:
         self.next = None
 
     def __name__(self):
-        return f'Node Class | node - self.data | child - self.next'
+        return f'Node Class | node - {self.data} | child - {self.next}'
     
     def __repr__(self):
-        return self.data
+        return str(self.data)
 
     def __call__(self):
         return self.data()
+        
+    def set_index(self, n):
+        self.data.index = n
 
+    def get_index(self):
+        return self.data.index
+
+    def pull(self):
+        return {**self.data(),**{'orders':[i() for i in self.data.order]}}
+
+    def __len__(self):
+        return len(self.data.order)
+
+    
 
 class LinkedList:
     def __init__(self, nodes=None):
@@ -62,6 +67,9 @@ class LinkedList:
             for elem in nodes:
                 node.next = Node(data=elem)
                 node = node.next
+
+    def get_customers(self):
+        return [i() for i in self]
 
     def append(self, obj):
         elem = Node(obj)
@@ -77,7 +85,7 @@ class LinkedList:
         node = self.head
         nodes = []
         while node is not None:
-            nodes.append(node.data.index)
+            nodes.append(node())
             node = node.next
         return nodes[index]
 
@@ -85,7 +93,7 @@ class LinkedList:
         node = self.head
         nodes = []
         while node is not None:
-            nodes.append(node())
+            nodes.append(node)
             node = node.next
         return str(nodes)
 
@@ -94,6 +102,12 @@ class LinkedList:
         while node is not None:
             yield node
             node = node.next
+
+    def __len__(self):
+        return sum(1 for _ in self.__iter__())
+
+    def pull(self):
+        return [p.pull() for p in self.__iter__()]
 
     def search(self, val, **kw):
         def sub(rv):
@@ -122,8 +136,9 @@ class DataConnector:
             msg = json.loads(j)
             if msg['event']['type'] == 'customer':
                 customer = Customer(msg['user_id'],msg['name'],i)
-                if self.data.head != None and customer in self.data:
-                    self.data[self.data.index(customer)].index = i
+                if customer() in self.data.get_customers():
+                    print('active')
+                    [j.set_index(i) for j in self.data if customer() == j()]
                 else:
                     self.data.append(customer)
                     
@@ -147,6 +162,6 @@ class DataConnector:
         return [i() for i in self.data]
 
 if __name__ == "__main__":
-    conn = DataConnector('bw_test.json')
+    conn = DataConnector('bw_events.json')
     data = conn.data
     

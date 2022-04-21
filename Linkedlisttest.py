@@ -13,8 +13,10 @@ class Node:
         self.next = None
 
     def __repr__(self):
-        return str([self.ID, self.name, self.gender, self.price])
+        return f'ID:{self.ID} | Name:{self.name}'
 
+    def __call__(self):
+        return {'id':self.ID, 'name':self.name, 'gender':self.gender, 'price':self.price}
 
 class LinkedList:
     def __init__(self, nodes=None):
@@ -30,7 +32,7 @@ class LinkedList:
         node = self.head
         nodes = []
         while node is not None:
-            nodes.append(node.ID)
+            nodes.append(node())
             node = node.next
         return nodes[index]
 
@@ -38,9 +40,12 @@ class LinkedList:
         node = self.head
         nodes = []
         while node is not None:
-            nodes.append(node.ID)
+            nodes.append(node)
             node = node.next
         return str(nodes)
+
+    def __len__(self):
+        return sum(1 for _ in self.__iter__())
 
     def __iter__(self):
         node = self.head
