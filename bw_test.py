@@ -1,5 +1,8 @@
 import json
-
+'''
+Written by: Stuart Anderson
+Copyright: Tobu Pengin, LLC, 2022
+'''
 
 class Customer:
     def __init__(self,ID,name,index):

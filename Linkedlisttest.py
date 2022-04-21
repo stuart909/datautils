@@ -1,7 +1,7 @@
 import uuid
 '''
 Written by: Stuart Anderson
-Copyright: Tobu Pengin, LLC, 2021
+Copyright: Tobu Pengin, LLC, 2022
 '''
 
 class Node:
