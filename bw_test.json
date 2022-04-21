@@ -8,3 +8,17 @@
 {"user_id": "1003", "order_id": "1004", "event": {"type": "order"}}
 {"user_id": "1001", "name": "terry", "event": {"type": "customer"}}
 {"user_id": "1001", "order_id": "1005", "event": {"type": "order"}}
+{"user_id": "1002", "name": "luke", "event": {"type": "customer"}}
+{"user_id": "1002", "order_id": "1006", "event": {"type": "order"}}
+{"user_id": "1001", "name": "bob", "event": {"type": "customer"}}
+{"user_id": "1001", "order_id": "1007", "event": {"type": "order"}}
+{"user_id": "1001", "order_id": "1008", "event": {"type": "order"}}
+{"user_id": "1001", "name": "terry", "event": {"type": "customer"}}
+{"user_id": "1001", "order_id": "1009", "event": {"type": "order"}}
+{"user_id": "1002", "order_id": "1010", "event": {"type": "order"}}
+{"user_id": "1003", "order_id": "1011", "event": {"type": "order"}}
+{"user_id": "1002", "order_id": "1012", "event": {"type": "order"}}
+{"user_id": "1002", "name": "brad", "event": {"type": "customer"}}
+{"user_id": "1003", "order_id": "1013", "event": {"type": "order"}}
+{"user_id": "1002", "order_id": "1014", "event": {"type": "order"}}
+
