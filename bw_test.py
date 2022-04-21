@@ -1,9 +1,9 @@
 import json
+
 '''
 Written by: Stuart Anderson
 Copyright: Tobu Pengin, LLC, 2022
 '''
-
 class Customer:
     def __init__(self,ID,name,index):
         self.ID = ID
@@ -109,23 +109,16 @@ class LinkedList:
     def __len__(self):
         return sum(1 for _ in self.__iter__())
 
-    def pull(self):
+    def __call__(self):
         return [p.pull() for p in self.__iter__()]
 
-    def search(self, val, **kw):
-        def sub(rv):
-            if len(rv) == 1:
-                return rv[0]
-            else:
-                return rv
-        if kw is None:
-            print(val)
-            return sub([i for i in self if i.ID == val or i.price == val or i.name == val])
+    def search(self, val, key=None):
+        if key is None:
+            return [i for i in self() if i['user_id'] == val]
+        elif key == 'orders':
+            return [i for i in self() if val in [j['order_id'] for j in i['orders']]]
         else:
-            print(kw)
-            print(val)
-            return sub([i for i in self if kw.values() in i])
-            
+            return [i for i in self() if i[key] == val]
 
 class DataConnector:
     def __init__(self,path):
